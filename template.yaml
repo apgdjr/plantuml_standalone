@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Evaluate a User Story Thru a workflow of GPT Agents.
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: bucket name
+  BucketPath:
+    Type: String
+    Description: bucket path
+  S3Website:
+    Type: String
+    Description: region
+    NoEcho: 'true'
+
+
+Globals:
+  Function:
+    Timeout: 500
+
+Resources:
+  lambdaPlantUMLHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./lambdas/lambdaPlantUML/
+      Handler: app.lambda_handler
+      Runtime: python3.11
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref BucketName
+          BUCKET_PATH: !Ref BucketPath
+          S3_WEBSITE: !Ref S3Website
+  PlantUMLBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+Outputs:
+  BucketName:
+    Description: Name of the S3 bucket to store plantuml diagrams
+    Value: !Ref PlantUMLBucket
+  WebsiteURL:
+    Description: URL of the S3 Bucket Website
+    Value: !GetAtt PlantUMLBucket.WebsiteURL

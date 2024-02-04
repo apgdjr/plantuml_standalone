@@ -1,0 +1,5 @@
+requests
+sphinx
+httplib2
+twine
+wheel

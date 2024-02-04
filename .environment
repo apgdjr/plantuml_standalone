@@ -1,0 +1,4 @@
+export BUCKET_NAME="plantuml-generator-plantumlbucket-2doe9dmrn3pe"
+export BUCKET_PATH="plantuml"
+export S3_WEBSITE="https://plantuml-generator-plantumlbucket-2doe9dmrn3pe.s3.eu-west-1.amazonaws.com/" 
+

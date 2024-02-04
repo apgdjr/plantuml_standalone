@@ -1,0 +1,6 @@
+/.DS_Store
+/.aws-sam
+/.secrets_aws
+/create_diagram.sh
+/deploy.sh
+/set_local_variables.sh
